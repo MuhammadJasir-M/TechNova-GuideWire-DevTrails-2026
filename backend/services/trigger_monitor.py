@@ -1,5 +1,5 @@
 """
-LaborGuard Trigger Monitor Service
+GigPulse Sentinel Trigger Monitor Service
 Real-time parametric trigger monitoring for 5 trigger types
 """
 

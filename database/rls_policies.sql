@@ -1,5 +1,5 @@
 -- ============================================
--- LaborGuard Row Level Security Policies
+-- GigPulse Sentinel Row Level Security Policies
 -- Supabase RLS Configuration
 -- ============================================
 

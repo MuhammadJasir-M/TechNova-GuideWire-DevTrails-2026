@@ -31,7 +31,7 @@ export default function Landing() {
             <span className="gradient-text">for Gig Workers</span>
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10 animate-slide-in" style={{ animationDelay: '0.1s' }}>
-            AI-powered parametric insurance that automatically detects disruptions, 
+            AI-powered parametric insurance that automatically detects disruptions,
             verifies claims, and pays delivery workers — before they even realize they've lost income.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in" style={{ animationDelay: '0.2s' }}>
@@ -50,12 +50,12 @@ export default function Landing() {
         <div className="glass-card p-8 md:p-12">
           <h2 className="text-3xl font-display font-bold text-white mb-6">Meet Ravi 👤</h2>
           <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            Zomato delivery partner in Chennai earning ₹700/day. When Cyclone Fengal floods his zone, 
+            Zomato delivery partner in Chennai earning ₹700/day. When Cyclone Fengal floods his zone,
             Zomato suspends deliveries. Ravi loses <span className="text-danger-400 font-bold">₹2,000 in 3 days</span> with zero recourse.
           </p>
           <p className="text-gray-400">
-            12+ million gig workers in India have no financial safety net. No ESIC, no PF, no insurance. 
-            <span className="text-white font-semibold"> LaborGuard fixes this.</span>
+            12+ million gig workers in India have no financial safety net. No ESIC, no PF, no insurance.
+            <span className="text-white font-semibold"> GigPulse Sentinel fixes this.</span>
           </p>
         </div>
       </section>
@@ -98,7 +98,7 @@ export default function Landing() {
       {/* Flow */}
       <section className="py-20 px-4 max-w-4xl mx-auto">
         <div className="glass-card p-8">
-          <h2 className="text-2xl font-display font-bold text-white mb-8 text-center">The LaborGuard Flow</h2>
+          <h2 className="text-2xl font-display font-bold text-white mb-8 text-center">The GigPulse Sentinel Flow</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {['ENROLL', 'MONITOR', 'TRIGGER', 'VERIFY', 'PAY'].map((step, i) => (
               <div key={step} className="flex items-center gap-3">
@@ -123,7 +123,7 @@ export default function Landing() {
       {/* CTA */}
       <section className="py-20 px-4 text-center">
         <h2 className="text-4xl font-display font-bold text-white mb-4">Ready to protect your income?</h2>
-        <p className="text-gray-400 mb-8">Join LaborGuard. Starting at just ₹29/week.</p>
+        <p className="text-gray-400 mb-8">Join GigPulse Sentinel. Starting at just ₹29/week.</p>
         <Link to="/login" className="btn-primary text-lg px-10 py-4">
           Start Now →
         </Link>

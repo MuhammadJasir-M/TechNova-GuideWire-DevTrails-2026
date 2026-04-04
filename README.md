@@ -1,6 +1,6 @@
-# 🛡️ LaborGuard
+# 🛡️ Gigpulse Sentinel
 
-### AI-Powered Parametric Income Protection for Gig Delivery Workers
+### An AI-Powered Parametric Income Agent for Gig Workers
 
 > _A zero-touch platform that automatically detects disruptions, verifies claims
 > with multi-signal fraud intelligence, and pays delivery workers before they
@@ -47,13 +47,13 @@ Ravi loses **₹2,000 in 3 days** with zero recourse.
 | Protection from weather he can't control    | ❌ Bears full loss alone      |
 
 Gig workers are classified as "independent contractors" — excluded from ESIC,
-PF, and every safety net that exists. **LaborGuard fixes this.**
+PF, and every safety net that exists. **GigPulse Sentinel fixes this.**
 
 ---
 
 ## 💡 Our Solution
 
-LaborGuard is an **AI-powered parametric income protection platform** exclusively
+GigPulse Sentinel is an **AI-powered parametric income protection platform** exclusively
 for food delivery partners (Zomato/Swiggy).
 
 ```
@@ -102,7 +102,7 @@ Tier-1 Indian cities: Chennai, Bengaluru, Mumbai, Hyderabad, Delhi
 
 ### 3. Real-Time Monitoring
 
-- LaborGuard silently monitors 5 parametric triggers for his zone 24/7
+- GigPulse Sentinel silently monitors 5 parametric triggers for his zone 24/7
 - No action needed from Ravi
 
 ### 4. Automatic Claim + Payout
@@ -168,7 +168,7 @@ real-world data sources simultaneously.
 ## 🧬 Earnings DNA Payout
 
 Most parametric platforms pay a **flat amount** (₹500 per disruption day, same
-for everyone). LaborGuard pays what the worker **actually lost.**
+for everyone). GigPulse Sentinel pays what the worker **actually lost.**
 
 ```
 Payout = (Worker's Avg Earnings for that Day/Time slot)
@@ -180,7 +180,7 @@ Payout = (Worker's Avg Earnings for that Day/Time slot)
 
 - Ravi earns more on Friday evenings (festival orders) than Monday mornings
 - A flood on Friday evening = 3× the financial loss of a Monday morning flood
-- LaborGuard's Earnings DNA profile captures this time-weighted pattern
+- GigPulse Sentinel's Earnings DNA profile captures this time-weighted pattern
 - His Friday evening payout reflects his actual loss, not a generic average
 
 **Weekly Payout Cap:** 2× weekly premium × plan multiplier
@@ -202,7 +202,7 @@ at home — triggering mass false payouts and draining the liquidity pool.
 
 ### 1. Differentiating Genuine Workers from Bad Actors
 
-Simple GPS coordinate check is insufficient. LaborGuard analyzes **7 independent
+Simple GPS coordinate check is insufficient. GigPulse Sentinel analyzes **7 independent
 signals simultaneously** to build a Fraud Risk Score (0–100):
 
 | Signal                        | What It Checks                                             | Fraud Indicator                                    |
@@ -236,7 +236,7 @@ If yes → Green. If he teleported from Adyar 10 minutes before → Amber.
 
 ### 2. Detecting Coordinated Fraud Rings
 
-Individual anomaly detection fails against organized syndicates. LaborGuard
+Individual anomaly detection fails against organized syndicates. GigPulse Sentinel
 adds a **group-level behavioral intelligence layer** using:
 
 **Algorithm: Isolation Forest + DBSCAN Clustering**
@@ -415,7 +415,7 @@ Instead of a cold "Approved" or "Rejected", Ravi sees:
 ## 📁 File Structure
 
 ```
-laborguard/
+Gigpulse Sentinel/
 ├── README.md
 ├── .env.example
 ├── .gitignore

@@ -1,5 +1,5 @@
 -- ============================================
--- LaborGuard Initial Migration
+-- GigPulse Sentinel Initial Migration
 -- Migration 001: Initial Schema
 -- ============================================
 

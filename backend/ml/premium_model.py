@@ -1,5 +1,5 @@
 """
-LaborGuard ML - Premium Pricing Model
+GigPulse Sentinel ML - Premium Pricing Model
 XGBoost regression for dynamic weekly premium calculation
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Policies API
+GigPulse Sentinel Policies API
 Weekly coverage plan management
 """
 

@@ -1,4 +1,4 @@
-# LaborGuard — Demo Script
+# GigPulse Sentinel — Demo Script
 
 ## Step-by-Step Video Walkthrough (3–5 Minutes)
 
@@ -8,7 +8,7 @@
 - Highlight the problem statement
 
 ### Scene 2: Worker Onboarding (45 sec)
-> "LaborGuard fixes this. Ravi signs up in 60 seconds."
+> "GigPulse Sentinel fixes this. Ravi signs up in 60 seconds."
 1. Click **"Get Protected"** on landing page
 2. Enter phone → Receive OTP (demo mode shows OTP)
 3. Platform ID verification (mock Zomato check)
@@ -36,7 +36,7 @@
 8. Total time: ~8 seconds from trigger to payout
 
 ### Scene 5: Fraud Defense Demo (45 sec)
-> "But what about fraud? LaborGuard catches it."
+> "But what about fraud? GigPulse Sentinel catches it."
 1. Switch to **Admin Dashboard**
 2. Show KPI overview (52 workers, 38 active policies)
 3. Click **Review Queue** → Show AMBER/RED claims
@@ -53,7 +53,7 @@
 4. Show **Liquidity Meter** → Pool health (green)
 
 ### Scene 7: Closing (15 sec)
-> "LaborGuard. From trigger to payout in under 10 seconds. Zero paperwork. AI-powered. Built on Guidewire."
+> "GigPulse Sentinel. From trigger to payout in under 10 seconds. Zero paperwork. AI-powered. Built on Guidewire."
 - Show flow: ENROLL → MONITOR → TRIGGER → VERIFY → PAY
 - Theme: Seed • Scale • Soar
 

@@ -1,5 +1,5 @@
 """
-LaborGuard ML - Earnings DNA
+GigPulse Sentinel ML - Earnings DNA
 Time-weighted earnings pattern analysis
 """
 

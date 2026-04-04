@@ -1,5 +1,5 @@
 """
-LaborGuard Premium Engine Service
+GigPulse Sentinel Premium Engine Service
 XGBoost-based dynamic weekly premium calculation
 Sub-zone precision: priced at 500m polygon level
 """

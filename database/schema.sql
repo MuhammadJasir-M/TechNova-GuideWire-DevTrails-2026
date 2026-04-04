@@ -1,5 +1,5 @@
 -- ============================================
--- LaborGuard Database Schema
+-- GigPulse Sentinel Database Schema
 -- Supabase PostgreSQL Compatible
 -- ============================================
 

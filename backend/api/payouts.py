@@ -1,5 +1,5 @@
 """
-LaborGuard Payouts API
+GigPulse Sentinel Payouts API
 Payout processing via Razorpay mock UPI
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Zone Engine Service
+GigPulse Sentinel Zone Engine Service
 Zone-based risk assessment & sub-zone mapping at 500m polygon precision
 """
 

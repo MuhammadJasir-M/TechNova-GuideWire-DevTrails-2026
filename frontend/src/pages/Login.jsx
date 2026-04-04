@@ -61,7 +61,7 @@ export default function Login() {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-shield-500 to-shield-700 flex items-center justify-center mx-auto mb-4 shadow-neon-blue">
             <Shield className="w-9 h-9 text-white" />
           </div>
-          <h1 className="text-3xl font-display font-bold text-white">LaborGuard</h1>
+          <h1 className="text-3xl font-display font-bold text-white">GigPulse Sentinel</h1>
           <p className="text-gray-400 mt-1">Income protection for gig workers</p>
         </div>
 

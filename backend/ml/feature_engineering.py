@@ -1,5 +1,5 @@
 """
-LaborGuard ML — Feature Engineering
+GigPulse Sentinel ML — Feature Engineering
 Feature prep for both premium and fraud models
 """
 

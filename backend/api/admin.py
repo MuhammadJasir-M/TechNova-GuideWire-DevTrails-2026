@@ -1,5 +1,5 @@
 """
-LaborGuard Admin API
+GigPulse Sentinel Admin API
 Dashboard, claim review, fraud ring management
 """
 

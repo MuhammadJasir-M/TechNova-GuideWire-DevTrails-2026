@@ -1,5 +1,5 @@
 """
-LaborGuard Notification Service
+GigPulse Sentinel Notification Service
 Push notification dispatch for workers
 """
 
@@ -24,7 +24,7 @@ class Notification:
 
 
 class NotificationService:
-    """Notification dispatch service for LaborGuard."""
+    """Notification dispatch service for GigPulse Sentinel."""
 
     # In-memory notification store (demo mode)
     _notifications: list[Notification] = []

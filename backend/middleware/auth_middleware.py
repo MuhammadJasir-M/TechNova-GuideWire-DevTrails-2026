@@ -1,5 +1,5 @@
 """
-LaborGuard JWT Authentication Middleware
+GigPulse Sentinel JWT Authentication Middleware
 OTP-based login, JWT tokens with 24-hour expiry, role-based access control
 """
 

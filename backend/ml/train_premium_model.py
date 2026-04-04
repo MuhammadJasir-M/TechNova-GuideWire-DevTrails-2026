@@ -1,5 +1,5 @@
 """
-LaborGuard ML — Train Premium Model
+GigPulse Sentinel ML — Train Premium Model
 XGBoost training script for dynamic weekly premium pricing
 """
 

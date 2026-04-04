@@ -1,5 +1,5 @@
 """
-LaborGuard ML - Ring Detection Model
+GigPulse Sentinel ML - Ring Detection Model
 DBSCAN clustering for coordinated fraud ring detection
 """
 

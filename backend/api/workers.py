@@ -1,5 +1,5 @@
 """
-LaborGuard Workers API
+GigPulse Sentinel Workers API
 Worker profile and trust score management
 """
 

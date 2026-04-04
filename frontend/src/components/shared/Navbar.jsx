@@ -31,7 +31,7 @@ export default function Navbar() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-shield-500 to-shield-700 flex items-center justify-center group-hover:shadow-neon-blue transition-shadow">
               <Shield className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-display font-bold gradient-text">LaborGuard</span>
+            <span className="text-lg font-display font-bold gradient-text">GigPulse Sentinel</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-1">

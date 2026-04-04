@@ -1,4 +1,4 @@
-# LaborGuard — Pitch Deck Outline
+# GigPulse Sentinel — Pitch Deck Outline
 
 > **Note**: This file serves as the pitch deck content outline.
 > For the final presentation, export to PDF/PPTX format.
@@ -6,7 +6,7 @@
 ---
 
 ## Slide 1: Title
-**LaborGuard** 🛡️
+**GigPulse Sentinel** 🛡️
 *AI-Powered Parametric Income Protection for Gig Delivery Workers*
 - Team TechNova
 - Guidewire DEVTrails University Hackathon 2026

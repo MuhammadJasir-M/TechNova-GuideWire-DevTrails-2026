@@ -1,5 +1,5 @@
 """
-LaborGuard Claims API
+GigPulse Sentinel Claims API
 Claim lifecycle management with fraud checking
 """
 

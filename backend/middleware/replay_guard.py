@@ -1,5 +1,5 @@
 """
-LaborGuard Replay Guard Middleware
+GigPulse Sentinel Replay Guard Middleware
 Nonce + timestamp deduplication — replay attacks rejected silently
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard ML - Synthetic Data Generator
+GigPulse Sentinel ML - Synthetic Data Generator
 Generates realistic data for all ML models
 """
 
@@ -52,7 +52,7 @@ LAST_NAMES = [
 
 
 class SyntheticDataGenerator:
-    """Generate realistic synthetic data for all LaborGuard ML models."""
+    """Generate realistic synthetic data for all GigPulse Sentinel ML models."""
 
     @staticmethod
     def generate_workers(count: int = 50) -> list[dict]:

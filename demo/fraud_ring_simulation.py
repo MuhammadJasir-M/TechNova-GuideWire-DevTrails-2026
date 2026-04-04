@@ -1,5 +1,5 @@
 """
-LaborGuard Demo — Fraud Ring Simulation
+GigPulse Sentinel Demo — Fraud Ring Simulation
 Simulates 50 fake GPS claims to trigger DBSCAN ring detection
 Run: python demo/fraud_ring_simulation.py
 """
@@ -29,7 +29,7 @@ def generate_ring_claims(
     """
 
     print("=" * 60)
-    print("🚨 LaborGuard Fraud Ring Simulation")
+    print("🚨 GigPulse Sentinel Fraud Ring Simulation")
     print("=" * 60)
     print(f"Ring Center: ({ring_center_lat}, {ring_center_lon})")
     print(f"Members: {num_members}")

@@ -1,5 +1,5 @@
 """
-LaborGuard Backend Configuration
+GigPulse Sentinel Backend Configuration
 Environment-based settings management
 """
 
@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # App
-    app_name: str = "LaborGuard"
+    app_name: str = "GigPulse Sentinel"
     app_version: str = "1.0.0"
     debug: bool = True
     backend_port: int = 8000
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     aes_encryption_key: str = "dev-32-byte-aes-key-change-prod!"
 
     # Database
-    database_url: str = "sqlite+aiosqlite:///./laborguard.db"
+    database_url: str = "sqlite+aiosqlite:///./gigpulse_sentinel.db"
 
     # Supabase (optional, for production)
     supabase_url: str = ""

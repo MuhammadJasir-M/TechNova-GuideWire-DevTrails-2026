@@ -1,5 +1,5 @@
 """
-LaborGuard Device Fingerprint Middleware
+GigPulse Sentinel Device Fingerprint Middleware
 One Device = One Account enforcement
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Trust Score Service
+GigPulse Sentinel Trust Score Service
 Worker trust score computation & management
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Triggers API
+GigPulse Sentinel Triggers API
 Parametric trigger status and history
 """
 

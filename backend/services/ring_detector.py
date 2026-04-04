@@ -1,5 +1,5 @@
 """
-LaborGuard Ring Detector Service
+GigPulse Sentinel Ring Detector Service
 DBSCAN + Isolation Forest for coordinated fraud ring detection
 """
 

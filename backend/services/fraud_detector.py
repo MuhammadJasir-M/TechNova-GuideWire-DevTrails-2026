@@ -1,5 +1,5 @@
 """
-LaborGuard Fraud Detector Service
+GigPulse Sentinel Fraud Detector Service
 7-signal fraud risk scoring using Isolation Forest approach
 """
 

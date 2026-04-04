@@ -1,5 +1,5 @@
 """
-LaborGuard Config — Constants
+GigPulse Sentinel Config — Constants
 All trigger thresholds, plan limits, and application constants
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Config — Security
+GigPulse Sentinel Config — Security
 JWT + AES-256 encryption configuration
 """
 

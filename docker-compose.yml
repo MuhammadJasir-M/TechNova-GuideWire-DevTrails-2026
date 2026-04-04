@@ -1,10 +1,10 @@
 services:
   backend:
     build: ./backend
-    image: laborguard/backend:latest
-    container_name: laborguard_backend
+    image: gigpulsesentinel/backend:latest
+    container_name: gigpulsesentinel_backend
     environment:
-      DATABASE_URL: sqlite+aiosqlite:///./laborguard.db
+      DATABASE_URL: sqlite+aiosqlite:///./gigpulsesentinel.db
       SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
       JWT_SECRET: ${JWT_SECRET:-dev-jwt-secret-change-in-production}
       JWT_ALGORITHM: HS256
@@ -27,11 +27,11 @@ services:
 
   frontend:
     build: ./frontend
-    image: laborguard/frontend:latest
-    container_name: laborguard_frontend
+    image: gigpulsesentinel/frontend:latest
+    container_name: gigpulsesentinel_frontend
     environment:
       VITE_API_BASE_URL: http://localhost:8000
-      VITE_APP_NAME: LaborGuard
+      VITE_APP_NAME: GigPulse Sentinel
     ports:
       - "5173:5173"
     depends_on:
@@ -44,4 +44,4 @@ services:
 volumes:
   backend_data:
     external: true
-    name: laborguard_backend_data
+    name: gigpulsesentinel_backend_data

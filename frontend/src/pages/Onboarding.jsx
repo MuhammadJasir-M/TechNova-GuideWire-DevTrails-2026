@@ -38,7 +38,7 @@ export default function Onboarding() {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-shield-500 to-shield-700 flex items-center justify-center mx-auto mb-4 shadow-neon-blue">
             <Shield className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-2xl font-display font-bold text-white">Join LaborGuard</h1>
+          <h1 className="text-2xl font-display font-bold text-white">Join GigPulse Sentinel</h1>
         </div>
 
         {/* Progress */}
@@ -108,7 +108,7 @@ export default function Onboarding() {
               <div className="w-16 h-16 rounded-full bg-safety-500/20 flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-safety-400" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">Welcome to LaborGuard! 🛡️</h2>
+              <h2 className="text-2xl font-bold text-white mb-2">Welcome to GigPulse Sentinel! 🛡️</h2>
               <p className="text-gray-400 mb-6">Your account is set up. You're in a 2-week probation period.</p>
               <button onClick={() => navigate('/dashboard')} className="btn-primary">Go to Dashboard →</button>
             </div>

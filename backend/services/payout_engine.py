@@ -1,5 +1,5 @@
 """
-LaborGuard Payout Engine Service
+GigPulse Sentinel Payout Engine Service
 Earnings DNA-based payout calculation
 Payout = (Avg Earnings for Day/Time) × (Disruption Hours / Working Hours) × Coverage Multiplier
 """

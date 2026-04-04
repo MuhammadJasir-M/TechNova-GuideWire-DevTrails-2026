@@ -1,5 +1,5 @@
 """
-LaborGuard ML — Model Drift Monitor
+GigPulse Sentinel ML — Model Drift Monitor
 Weekly accuracy check for premium and fraud models
 """
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Auth API
+GigPulse Sentinel Auth API
 OTP-based login, registration, JWT token management
 """
 

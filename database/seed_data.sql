@@ -1,5 +1,5 @@
 -- ============================================
--- LaborGuard Seed Data
+-- GigPulse Sentinel Seed Data
 -- Demo workers + zones for presentation
 -- ============================================
 

@@ -1,5 +1,5 @@
 """
-LaborGuard Audit Logger Service
+GigPulse Sentinel Audit Logger Service
 Immutable SHA-256 audit trail for every claim state change
 """
 

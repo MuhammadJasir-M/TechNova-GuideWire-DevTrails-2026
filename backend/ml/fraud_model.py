@@ -1,5 +1,5 @@
 """
-LaborGuard ML - Fraud Detection Model
+GigPulse Sentinel ML - Fraud Detection Model
 Isolation Forest for individual fraud anomaly detection
 """
 

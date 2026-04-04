@@ -1,5 +1,5 @@
 """
-LaborGuard Backend - Main FastAPI Application
+Gigpulse Sentinel Backend - Main FastAPI Application
 AI-Powered Parametric Income Protection for Gig Delivery Workers
 """
 
@@ -23,7 +23,7 @@ settings = get_settings()
 async def lifespan(app: FastAPI):
     """Application lifecycle - initialize DB on startup."""
     await init_db()
-    print("🛡️ LaborGuard Backend Started")
+    print("🛡️ GigPulse Sentinel Backend Started")
     print(f"📊 Database: {settings.database_url}")
     print(f"🔧 Mock APIs: {'Enabled' if settings.use_mock_apis else 'Disabled'}")
 
@@ -39,11 +39,11 @@ async def lifespan(app: FastAPI):
             print("🌍 Seeded default zones")
 
     yield
-    print("🛡️ LaborGuard Backend Shutting Down")
+    print("🛡️ GigPulse Sentinel Backend Shutting Down")
 
 
 app = FastAPI(
-    title="LaborGuard API",
+    title="GigPulse Sentinel API",
     description="AI-Powered Parametric Income Protection for Gig Delivery Workers",
     version="1.0.0",
     lifespan=lifespan,
@@ -92,7 +92,7 @@ if settings.use_mock_apis:
 async def root():
     """Health check endpoint."""
     return {
-        "app": "LaborGuard",
+        "app": "GigPulse Sentinel",
         "version": "1.0.0",
         "status": "running",
         "description": "AI-Powered Parametric Income Protection for Gig Delivery Workers",

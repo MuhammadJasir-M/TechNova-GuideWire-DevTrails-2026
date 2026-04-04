@@ -1,5 +1,5 @@
 """
-LaborGuard Config — Database
+GigPulse Sentinel Config — Database
 Supabase client setup + SQLAlchemy for local dev
 """
 
@@ -7,7 +7,7 @@ import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./laborguard.db")
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./gigpulse_sentinel.db")
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
 SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY", "")
 SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY", "")

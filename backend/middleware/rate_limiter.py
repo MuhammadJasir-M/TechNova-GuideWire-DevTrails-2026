@@ -1,5 +1,5 @@
 """
-LaborGuard Rate Limiter Middleware
+GigPulse Sentinel Rate Limiter Middleware
 Simple in-memory rate limiting per IP/user
 """
 

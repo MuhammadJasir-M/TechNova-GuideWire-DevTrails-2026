@@ -1,5 +1,5 @@
 """
-LaborGuard ML — Train Fraud Model
+GigPulse Sentinel ML — Train Fraud Model
 Isolation Forest training script for anomaly detection
 """
 

@@ -1,4 +1,4 @@
-name: GigShield CI
+name: GigPulse Sentinel CI
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
         run: pytest ../tests/ -v
         env:
           USE_MOCK_APIS: "true"
-          DATABASE_URL: "sqlite:///./test_gigshield.db"
+          DATABASE_URL: "sqlite:///./test_gigpulse_sentinel.db"
           SECRET_KEY: "test-secret-key"
           JWT_SECRET: "test-jwt-secret"
 
