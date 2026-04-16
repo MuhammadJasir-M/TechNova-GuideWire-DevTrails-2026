@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     supabase_anon_key: str = ""
     supabase_service_key: str = ""
 
-    # External APIs
+    # External APIs - set to real key for live weather data, or "mock" for mock mode
     openweathermap_api_key: str = "mock"
     aqicn_api_key: str = "mock"
     imd_api_base_url: str = "http://localhost:8000/mock/imd"
