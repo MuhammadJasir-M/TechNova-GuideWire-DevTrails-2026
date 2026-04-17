@@ -7,6 +7,7 @@ from .workers import router as workers_router
 from .admin import router as admin_router
 from .payouts import router as payouts_router
 from .agents import router as agents_router
+from .websocket import router as websocket_router
 
 __all__ = [
     "auth_router",
@@ -17,4 +18,5 @@ __all__ = [
     "admin_router",
     "payouts_router",
     "agents_router",
+    "websocket_router",
 ]

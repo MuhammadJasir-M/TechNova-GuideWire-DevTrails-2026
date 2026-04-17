@@ -1,0 +1,44 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.3, pluggy-1.6.0 -- C:\Program Files\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: D:\TechNova-GuideWire-DevTrails-2026
+configfile: pytest.ini
+plugins: anyio-4.10.0, Faker-38.2.0, langsmith-0.6.8, asyncio-1.3.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=session, asyncio_default_test_loop_scope=function
+collecting ... collected 32 items
+
+tests/test_simulator.py::TestSimulatorEvent::test_create_event PASSED    [  3%]
+tests/test_simulator.py::TestSimulatorEvent::test_to_dict PASSED         [  6%]
+tests/test_simulator.py::TestSimulatorEvent::test_event_ids_unique PASSED [  9%]
+tests/test_simulator.py::TestEventBroadcaster::test_subscribe_and_broadcast PASSED [ 12%]
+tests/test_simulator.py::TestEventBroadcaster::test_channel_routing_worker PASSED [ 15%]
+tests/test_simulator.py::TestEventBroadcaster::test_channel_routing_zone PASSED [ 18%]
+tests/test_simulator.py::TestEventBroadcaster::test_admin_gets_all PASSED [ 21%]
+tests/test_simulator.py::TestEventBroadcaster::test_replay_buffer PASSED [ 25%]
+tests/test_simulator.py::TestEventBroadcaster::test_replay_buffer_bounded PASSED [ 28%]
+tests/test_simulator.py::TestEventBroadcaster::test_unsubscribe PASSED   [ 31%]
+tests/test_simulator.py::TestEventBroadcaster::test_event_count PASSED   [ 34%]
+tests/test_simulator.py::TestEventBroadcaster::test_multiple_subscribers_same_channel PASSED [ 37%]
+tests/test_simulator.py::TestScenarioTemplates::test_all_scenarios_exist PASSED [ 40%]
+tests/test_simulator.py::TestScenarioTemplates::test_all_scenarios_have_steps PASSED [ 43%]
+tests/test_simulator.py::TestScenarioTemplates::test_pick_scenario_returns_template PASSED [ 46%]
+tests/test_simulator.py::TestScenarioTemplates::test_step_data_generation PASSED [ 50%]
+tests/test_simulator.py::TestScenarioTemplates::test_zone_pool_not_empty PASSED [ 53%]
+tests/test_simulator.py::TestScenarioTemplates::test_worker_pool_not_empty PASSED [ 56%]
+tests/test_simulator.py::TestMockDataSimulator::test_simulator_creation PASSED [ 59%]
+tests/test_simulator.py::TestMockDataSimulator::test_emit_single PASSED  [ 62%]
+tests/test_simulator.py::TestMockDataSimulator::test_start_stop PASSED   [ 65%]
+tests/test_websocket.py::TestWebSocketEndpoints::test_broadcaster_integration_with_ws PASSED [ 68%]
+tests/test_websocket.py::TestWebSocketEndpoints::test_replay_on_subscribe PASSED [ 71%]
+tests/test_websocket.py::TestWebSocketEndpoints::test_multiple_clients_same_channel PASSED [ 75%]
+tests/test_websocket.py::TestWebSocketEndpoints::test_client_disconnect_cleanup PASSED [ 78%]
+tests/test_websocket.py::TestWebSocketEndpoints::test_concurrent_broadcasts PASSED [ 81%]
+tests/test_websocket.py::TestSSELogic::test_event_json_serializable PASSED [ 84%]
+tests/test_websocket.py::TestSSELogic::test_all_event_types_serializable PASSED [ 87%]
+tests/test_websocket.py::TestChannelRouting::test_worker_receives_own_events PASSED [ 90%]
+tests/test_websocket.py::TestChannelRouting::test_worker_does_not_receive_others PASSED [ 93%]
+tests/test_websocket.py::TestChannelRouting::test_zone_subscription PASSED [ 96%]
+tests/test_websocket.py::TestChannelRouting::test_admin_receives_everything PASSED [100%]
+
+============================= 32 passed in 0.66s ==============================
+

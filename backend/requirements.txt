@@ -20,3 +20,4 @@ apscheduler>=3.10.4
 langgraph>=1.1.0
 langchain>=1.2.0
 langchain-cerebras>=0.8.0
+sse-starlette>=2.0.0

@@ -94,9 +94,13 @@ def mock_cerebras():
     def mock_invoke(pydantic_model, system_prompt, user_prompt):
         return mock_response
     
-    with patch("backend.agents.base.invoke_with_structure", side_effect=mock_invoke):
-        with patch("backend.agents.base.get_llm") as mock_get_llm:
-            mock_llm = MagicMock()
-            mock_llm.with_structured_output.return_value = mock_response
-            mock_get_llm.return_value = mock_llm
-            yield
+    try:
+        with patch("backend.agents.base.invoke_with_structure", side_effect=mock_invoke):
+            with patch("backend.agents.base.get_llm") as mock_get_llm:
+                mock_llm = MagicMock()
+                mock_llm.with_structured_output.return_value = mock_response
+                mock_get_llm.return_value = mock_llm
+                yield
+    except (AttributeError, ModuleNotFoundError):
+        # backend.agents.base may not be importable if langgraph is missing
+        yield

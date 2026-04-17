@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../hooks/useAuth'
+import { useRealtime } from '../context/RealtimeContext'
 import CoverageCard from '../components/dashboard/CoverageCard'
 import EarningsProtected from '../components/dashboard/EarningsProtected'
 import TrustScoreBadge from '../components/dashboard/TrustScoreBadge'
 import ZoneAlertBanner from '../components/dashboard/ZoneAlertBanner'
 import WeeklyReceipt from '../components/dashboard/WeeklyReceipt'
 import PoolHealthIndicator from '../components/dashboard/PoolHealthIndicator'
+import ActivityFeed from '../components/shared/ActivityFeed'
 import LoadingSpinner from '../components/shared/LoadingSpinner'
 import NotificationDrawer from '../components/shared/NotificationDrawer'
 import api from '../utils/api'
 import { formatCurrency } from '../utils/formatCurrency'
-import { Shield, Bell, Clock, MapPin } from 'lucide-react'
+import { Shield, Bell, Clock, MapPin, Wifi, WifiOff } from 'lucide-react'
 
 export default function WorkerDashboard() {
   const { user } = useAuth()
+  const { activeTriggers, claimUpdates, connectionHealth } = useRealtime()
   const [profile, setProfile] = useState(null)
   const [policy, setPolicy] = useState(null)
   const [triggers, setTriggers] = useState([])
@@ -22,6 +25,22 @@ export default function WorkerDashboard() {
   const [notifOpen, setNotifOpen] = useState(false)
 
   useEffect(() => { loadData() }, [])
+
+  // Merge real-time triggers with fetched triggers
+  useEffect(() => {
+    if (activeTriggers.length > 0) {
+      setTriggers(prev => {
+        const newTriggers = activeTriggers
+          .filter(t => t.data?.zone_code === profile?.primary_zone_code || t.priority === 'CRITICAL')
+          .map(t => ({
+            type: t.data?.trigger_type || t.event_type,
+            severity: t.data?.severity || t.priority,
+            value: t.data?.rainfall_mm || t.data?.temperature_c || t.data?.aqi,
+          }))
+        return [...newTriggers, ...prev].slice(0, 10)
+      })
+    }
+  }, [activeTriggers, profile?.primary_zone_code])
 
   const loadData = async () => {
     try {
@@ -45,6 +64,12 @@ export default function WorkerDashboard() {
   const p = profile || { name: user?.name, primary_zone_code: 'CHN-VEL-4B', avg_weekly_earnings: 4200, trust_score: 78.5, fraud_strikes: 0 }
   const activePolicy = policy?.has_active_policy ? policy.policy : null
 
+  // Compute live stats from claim updates
+  const liveClaims = claimUpdates.filter(e => e.event_type === 'CLAIM_AUTO_FILED').length
+  const livePaid = claimUpdates
+    .filter(e => e.event_type === 'PAYOUT_COMPLETED')
+    .reduce((sum, e) => sum + (e.data?.amount || 0), 0)
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
@@ -56,6 +81,20 @@ export default function WorkerDashboard() {
           <div className="flex items-center gap-3 mt-2 text-sm text-gray-400">
             <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {p.primary_zone_code}</span>
             <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Week of Apr 1–7</span>
+            {/* Connection indicator */}
+            <span className="flex items-center gap-1">
+              {connectionHealth.isConnected ? (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-green-400 text-xs">Live</span>
+                </>
+              ) : (
+                <>
+                  <span className="w-2 h-2 rounded-full bg-red-500" />
+                  <span className="text-red-400 text-xs">Offline</span>
+                </>
+              )}
+            </span>
           </div>
         </div>
         <button
@@ -83,7 +122,7 @@ export default function WorkerDashboard() {
           
           <div className="grid sm:grid-cols-2 gap-6">
             <EarningsProtected weeklyEarnings={p.avg_weekly_earnings} coverageMultiplier={activePolicy?.coverage_multiplier || 1.5} />
-            <WeeklyReceipt premiumPaid={activePolicy?.premium_amount || 0} claimsPaid={2} totalPayout={1200} />
+            <WeeklyReceipt premiumPaid={activePolicy?.premium_amount || 0} claimsPaid={2 + liveClaims} totalPayout={1200 + livePaid} />
           </div>
 
           {/* Quick Stats */}
@@ -91,12 +130,12 @@ export default function WorkerDashboard() {
             {[
               { label: 'Weekly Earnings', value: formatCurrency(p.avg_weekly_earnings), color: 'text-white' },
               { label: 'Tenure', value: `${p.tenure_weeks || 0} weeks`, color: 'text-shield-400' },
-              { label: 'Claims Filed', value: '3', color: 'text-alert-400' },
-              { label: 'Total Received', value: '₹3,600', color: 'text-safety-400' },
+              { label: 'Claims Filed', value: `${3 + liveClaims}`, color: 'text-alert-400' },
+              { label: 'Total Received', value: formatCurrency(3600 + livePaid), color: 'text-safety-400' },
             ].map(({ label, value, color }) => (
-              <div key={label} className="stat-card">
+              <div key={label} className="stat-card group">
                 <p className="text-xs text-gray-400">{label}</p>
-                <p className={`text-xl font-bold ${color} mt-1`}>{value}</p>
+                <p className={`text-xl font-bold ${color} mt-1 transition-all duration-300 group-hover:scale-105`}>{value}</p>
               </div>
             ))}
           </div>
@@ -106,6 +145,9 @@ export default function WorkerDashboard() {
         <div className="space-y-6">
           <TrustScoreBadge score={trustScore?.trust_score ?? p.trust_score} strikes={trustScore?.fraud_strikes ?? p.fraud_strikes} />
           <PoolHealthIndicator ratio={0.72} />
+
+          {/* Live Activity Feed */}
+          <ActivityFeed compact={true} maxItems={15} />
 
           {/* Coverage Nudge */}
           {!activePolicy && (

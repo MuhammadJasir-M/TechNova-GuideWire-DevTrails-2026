@@ -48,6 +48,12 @@ class Settings(BaseSettings):
     # Mock mode
     use_mock_apis: bool = True
 
+    # Real-time mock scenarios
+    enable_mock_scenarios: bool = False
+    mock_scenario_interval: int = 20
+    websocket_enabled: bool = True
+    mock_event_queue_size: int = 1000
+
     # CORS
     cors_origins: str = "http://localhost:5173,http://localhost:3000"
 

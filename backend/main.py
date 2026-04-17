@@ -16,7 +16,7 @@ from backend.services.scheduler import start_scheduler
 from backend.api import (
     auth_router, policies_router, claims_router,
     triggers_router, workers_router, admin_router,
-    payouts_router, agents_router,
+    payouts_router, agents_router, websocket_router,
 )
 from sqlalchemy import select
 
@@ -51,8 +51,23 @@ async def lifespan(app: FastAPI):
     # Start background scheduler (leader-only in multi-instance)
     scheduler = start_scheduler()
 
+    # Start mock data simulator if enabled
+    simulator = None
+    if settings.enable_mock_scenarios:
+        from backend.services.event_broadcaster import get_broadcaster
+        from backend.services.mock_data_simulator import get_simulator
+        broadcaster = get_broadcaster(max_replay=settings.mock_event_queue_size)
+        app.state.broadcaster = broadcaster
+        simulator = get_simulator(interval=settings.mock_scenario_interval)
+        simulator.start()
+        print(f"🔴 Mock Scenario Simulator: Running (interval={settings.mock_scenario_interval}s)")
+        print(f"📡 WebSocket Streaming: {'Enabled' if settings.websocket_enabled else 'Disabled'}")
+
     yield
 
+    # Shutdown
+    if simulator and simulator.is_running:
+        simulator.stop()
     try:
         if scheduler and scheduler.running:
             scheduler.shutdown(wait=False)
@@ -90,6 +105,7 @@ app.include_router(workers_router, prefix="/api")
 app.include_router(admin_router, prefix="/api")
 app.include_router(agents_router, prefix="/api")
 app.include_router(payouts_router, prefix="/api")
+app.include_router(websocket_router)
 
 # Mock APIs (if enabled)
 if settings.use_mock_apis:
