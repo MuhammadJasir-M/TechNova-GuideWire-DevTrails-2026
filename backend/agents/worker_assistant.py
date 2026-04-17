@@ -58,8 +58,7 @@ def llm_explain(state: AgentState) -> dict:
     policy_data = context.get("policy_data", {})
 
     prompt = f"""You are a friendly Worker Assistant for GigPulse Sentinel. 
-Answer the worker's question in simple, conversational Hindi-English (Hinglish) if appropriate, 
-or clear English. Be empathetic and helpful.
+Answer the worker's question in simple, conversational in clear English. Be empathetic and helpful.
 
 ## Worker's Question
 "{question}"
