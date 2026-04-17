@@ -213,8 +213,8 @@ Join us in transforming income protection from _reactive claims processing_ to *
 3. Discuss partnership opportunities (Zomato/Swiggy integrations, reinsurance)
 
 📧 **Contact:** hello@gigpulse-sentinel.com  
-🔗 **Demo:** [Interactive Walkthrough](./demo/demo_script.md)  
-📊 **Pitch Deck:** [Full Slide Deck PDF](./demo/pitch_deck.md)
+🔗 **Demo:** [https://drive.google.com/file/d/19Z29nblgIksE7FM4LNXsJEInQeOrXVNH/view?usp=drive_link](./demo/demo_script.md)  
+📊 **Pitch Deck:** [https://docs.google.com/presentation/d/1klOWzJUF3v_PN7I9QlbYIHanEyo2ojug/edit?usp=drive_link&ouid=110764906119023181824&rtpof=true&sd=true](./demo/pitch_deck.md)
 
 ---
 
