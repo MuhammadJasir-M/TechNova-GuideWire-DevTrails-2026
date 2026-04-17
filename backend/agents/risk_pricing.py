@@ -9,6 +9,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from backend.agents.base import (
     AgentState, invoke_with_structure, SYSTEM_PREAMBLE, format_context,
 )
+from backend.ml.premium_model import premium_model
 
 
 # ─── Pydantic Output Schema ─────────────────────────────────────────────────
@@ -27,9 +28,14 @@ class PricingDecision(BaseModel):
 # ─── LangGraph Nodes ─────────────────────────────────────────────────────────
 
 def check_live_conditions(state: AgentState) -> dict:
-    """Node 1: Check current live risk conditions for the worker's zone."""
+    """Node 1: Compute deterministic premium from ML model + keep live events.
+
+    Policy: premium_model prediction is the source of truth for suggested_premium.
+    LLM may recommend HUMAN_REVIEW but must not change the premium.
+    """
     context = state["context"]
     zone_data = context.get("zone_data", {})
+    worker_data = context.get("worker_data", {})
 
     # Build live event summary
     live_events = []
@@ -49,17 +55,47 @@ def check_live_conditions(state: AgentState) -> dict:
 
     context["live_events"] = live_events
     context["overall_risk_score"] = (flood_risk * 0.35 + heat_risk * 0.20 + aqi_risk * 0.20 + min(strike_freq * 20, 100) * 0.25)
+
+    # Deterministic premium prediction (Option A ML model).
+    try:
+        features = {
+            "flood_risk_3yr": float(zone_data.get("flood_risk_score", 50) or 50),
+            # Placeholder until real forecasts exist.
+            "weather_forecast_risk": float(zone_data.get("heat_risk_score", 50) or 50),
+            "aqi_forecast": float(zone_data.get("aqi_risk_score", 50) or 50),
+            "strike_frequency": float(zone_data.get("strike_frequency_yearly", 1.0) or 1.0),
+            "avg_weekly_earnings": float(worker_data.get("avg_weekly_earnings", 5000) or 5000),
+            "tenure_weeks": int(worker_data.get("tenure_weeks", 0) or 0),
+            "past_claims_count": int(context.get("past_claims_count", 0) or 0),
+        }
+        pred = premium_model.predict(features)
+        context["premium_ml"] = {
+            "features": features,
+            "prediction": pred,
+        }
+        context["ml_suggested_premium"] = float(pred.get("premium", context.get("current_premium", 45)) or context.get("current_premium", 45))
+    except Exception:
+        context["premium_ml"] = None
+        context["ml_suggested_premium"] = None
     return {"context": context}
 
 
 def llm_price(state: AgentState) -> dict:
-    """Node 2: LLM generates dynamic pricing recommendation."""
+    """Node 2: LLM explains the ML premium and suggests next steps."""
     context = state["context"]
     worker_data = context.get("worker_data", {})
     zone_data = context.get("zone_data", {})
+    ml_suggested = context.get("ml_suggested_premium")
+    premium_ml = context.get("premium_ml") or {}
+    pred = premium_ml.get("prediction", {}) if isinstance(premium_ml, dict) else {}
 
     prompt = f"""You are a Risk Pricing Agent. Analyze current conditions and recommend 
-optimal weekly insurance premium for this worker.
+ optimal weekly insurance premium for this worker.
+
+Important policy:
+- The premium amount is already predicted by a deterministic pricing model.
+- You must NOT change the suggested premium.
+- You may recommend HUMAN_REVIEW if the situation seems inconsistent or high risk.
 
 ## Worker Profile
 - Average Weekly Earnings: ₹{worker_data.get('avg_weekly_earnings', 4200)}
@@ -80,6 +116,12 @@ optimal weekly insurance premium for this worker.
 ## Live Events
 {chr(10).join(f'- {e}' for e in context.get('live_events', ['No active events']))}
 
+## ML Pricing Model Output (Source Of Truth)
+- Suggested Premium: ₹{ml_suggested if ml_suggested is not None else context.get('current_premium', 45)}
+- Model Risk Score: {pred.get('risk_score', 'N/A')}
+- Feature Contributions:
+{format_context(pred.get('feature_contributions', {})) if isinstance(pred, dict) else 'N/A'}
+
 Premium range: ₹29 (minimum) to ₹135 (maximum for PREMIUM tier).
 Consider: zone risk, live events, worker tenure (loyal workers get discount), 
 and whether the worker should upgrade their coverage tier."""
@@ -99,6 +141,16 @@ and whether the worker should upgrade their coverage tier."""
             coverage_suggestion="Consider PREMIUM tier" if risk > 60 else "Current plan adequate",
             price_change_pct=round((suggested - current) / current * 100, 1) if current > 0 else 0,
         )
+
+    # Enforce ML premium as source of truth when available.
+    if ml_suggested is not None:
+        try:
+            result.suggested_premium = float(ml_suggested)
+            current = float(context.get("current_premium", 45) or 45)
+            result.current_premium = current
+            result.price_change_pct = round((float(ml_suggested) - current) / current * 100, 1) if current > 0 else 0
+        except Exception:
+            pass
 
     return {"result": result.model_dump()}
 

@@ -10,6 +10,7 @@ from backend.agents.base import (
     AgentState, invoke_with_structure, SYSTEM_PREAMBLE, format_context,
 )
 from backend.services.ring_detector import RingDetector
+from backend.ml.ring_model import ring_model
 
 
 # ─── Pydantic Output Schema ─────────────────────────────────────────────────
@@ -29,22 +30,58 @@ class RingInvestigation(BaseModel):
 # ─── LangGraph Nodes ─────────────────────────────────────────────────────────
 
 def load_clusters(state: AgentState) -> dict:
-    """Node 1: Load detected clusters from DBSCAN ring detector."""
+    """Node 1: Load clusters from deterministic clustering model.
+
+    Source-of-truth cluster generation uses backend/ml/ring_model.py (Option A).
+    Falls back to services/RingDetector demo clustering on error.
+    """
     context = state["context"]
 
-    # Use existing ring detector to get clusters
+    # If upstream already passed detected rings, use them.
     detected_rings = context.get("detected_rings", [])
-    if not detected_rings:
-        # Generate demo detection
-        import asyncio
-        from backend.models.database import async_session
-        # Use sync fallback for demo
-        detected_rings = RingDetector._generate_demo_claims()
-        spatial = RingDetector._detect_spatial_clusters(detected_rings)
-        timing = RingDetector._detect_timing_sync(detected_rings)
-        device = RingDetector._detect_device_correlation(detected_rings)
+    if detected_rings:
+        return {"context": context}
+
+    # Otherwise build clusters from claims data.
+    claims_data = context.get("raw_claims")
+    if not claims_data:
+        claims_data = RingDetector._generate_demo_claims()
+        context["raw_claims"] = claims_data
+
+    try:
+        ml_out = ring_model.fit_predict(claims_data)
+        rings = []
+        for c in ml_out.get("clusters", []):
+            # Convert RingModel cluster into the shape expected by the LLM prompt.
+            methods = c.get("detection_methods", [])
+            rings.append(
+                {
+                    "ring_id": f"ML_{c.get('cluster_id', '?')}",
+                    "detection_method": "+".join(methods) if methods else "DBSCAN",
+                    "member_count": c.get("member_count", 0),
+                    "member_worker_ids": c.get("member_ids", []),
+                    "center_latitude": c.get("center_latitude"),
+                    "center_longitude": c.get("center_longitude"),
+                    "radius_meters": c.get("radius_meters"),
+                    "shared_signals": {
+                        "type": "DBSCAN clustering",
+                        "detail": f"methods={methods}, timing_spread={c.get('timing_spread_seconds')}s, ip_subnets={c.get('unique_ip_subnets')}",
+                        "home_zones": c.get("home_zones", []),
+                    },
+                    "severity": c.get("severity", "MEDIUM"),
+                    "confidence": c.get("confidence", 0),
+                }
+            )
+
+        context["detected_rings"] = rings
+        context["ring_ml"] = {"summary": {"rings_detected": ml_out.get("rings_detected"), "noise_points": ml_out.get("noise_points")}}
+    except Exception:
+        # Fallback to existing detector behaviors.
+        spatial = RingDetector._detect_spatial_clusters(claims_data)
+        timing = RingDetector._detect_timing_sync(claims_data)
+        device = RingDetector._detect_device_correlation(claims_data)
         context["detected_rings"] = spatial + timing + device
-        context["raw_claims"] = detected_rings
+        context["ring_ml"] = None
 
     return {"context": context}
 
@@ -125,7 +162,7 @@ class RingDetectiveAgent:
         return cls._graph
 
     @classmethod
-    async def investigate(cls, detected_rings: list[dict] = None) -> dict:
+    async def investigate(cls, detected_rings: list[dict] | None = None) -> dict:
         graph = cls.get_graph()
         initial_state = {
             "messages": [],
